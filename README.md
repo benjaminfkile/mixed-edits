@@ -1,21 +1,13 @@
-# SignalR demo
+# Whose out there
 
-This is a playground for getting familiar with Signal R.
+A website that can tell if someone else is editing something at the same time somebody else is.
 
-Go here to check out how to make your own Signal R function:
+Copy the url and paste it into another browser window, position them so you can see both windows. Click the "Edit Something" button in both windows
 
-https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server
+https://whos-out-there-benjaminfkile.vercel.app/
 
 ## Installation
 
 npm i 
 
 npm start
-
-```javascript
-## Usage
-
-import operations
-
-operations.signalROut({type: "chatMsg", userName: userName, message: message })
-```# whose-out-there
