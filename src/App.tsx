@@ -16,8 +16,6 @@ interface AppTypes {
 
 class App extends Component<{}, AppTypes> {
 
-  updadeInterval: any
-
   constructor(props: any) {
     super(props)
     this.state = {
