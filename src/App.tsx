@@ -23,10 +23,13 @@ class App extends Component<{}, AppTypes> {
     dismiss: false
   }
 
+  /***************************************************************************************************************************************/
   componentDidMount() {
+    //starts listening for messages from connected clients
     connection.on("newMessage", this.signalRIn)
   }
 
+  //grabs the session key, if your session key doesnt match the incoming key you know somebody else is editing the document at the same time
   signalRIn = (input: any) => {
     if (this.state.editWindow && input.key !== this.state.sessionKey) {
       this.setState({ multipleUsers: true })
@@ -35,9 +38,12 @@ class App extends Component<{}, AppTypes> {
     console.log("My session key: " + this.state.sessionKey)
   }
 
+  //whenevre a user clicks the edit button they broadcast there session key (a uuid) it has nohing to do with any bearer tokens
   signalROut = () => {
     axios.post("https://elmsigr-fn.azurewebsites.net/api/messages", { key: this.state.sessionKey })
   }
+  /***************************************************************************************************************************************/
+
 
   handleChange = (event: any) => {
     console.log(event)
