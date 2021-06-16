@@ -1,13 +1,17 @@
-# Whose out there
+# Mixed Edits
 
-A website that can tell if someone else is editing something at the same time somebody else is.
-
-Copy the url and paste it into another browser window, position them so you can see both windows. Click the "Edit Something" button in both windows
-
-https://whos-out-there-benjaminfkile.vercel.app/
+A demo for detecting multiple users editing the same document.
 
 ## Installation
 
-npm i 
+```bash
+npm i
+```
 
-npm start
+## Usage
+
+```javascript
+const signalR = require("@microsoft/signalr");
+
+connection.on("newMessage", this.signalRIn)
+```

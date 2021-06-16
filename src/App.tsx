@@ -1,11 +1,11 @@
 import { Component } from "react"
+import axios from "axios"
 import connection from "./Hub/Hub"
 import { Button, FormControl, Modal } from "react-bootstrap"
 //@ts-ignore
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
-import axios from "axios";
 
 interface AppTypes {
   editWindow: boolean
@@ -16,14 +16,11 @@ interface AppTypes {
 
 class App extends Component<{}, AppTypes> {
 
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      editWindow: false,
-      sessionKey: uuidv4(),
-      multipleUsers: false,
-      dismiss: false
-    }
+  state = {
+    editWindow: false,
+    sessionKey: uuidv4(),
+    multipleUsers: false,
+    dismiss: false
   }
 
   componentDidMount() {
@@ -36,6 +33,10 @@ class App extends Component<{}, AppTypes> {
     }
     console.log("SignalR incoming: " + input.key)
     console.log("My session key: " + this.state.sessionKey)
+  }
+
+  signalROut = () => {
+    axios.post("https://elmsigr-fn.azurewebsites.net/api/messages", { key: this.state.sessionKey })
   }
 
   handleChange = (event: any) => {
@@ -57,11 +58,6 @@ class App extends Component<{}, AppTypes> {
     } else {
       this.setState({ dismiss: true, multipleUsers: false })
     }
-  }
-
-  signalROut = () => {
-    axios.post("https://elmsigr-fn.azurewebsites.net/api/messages", { key: this.state.sessionKey })
-      .then((resp: any) => resp.data);
   }
 
   render() {
@@ -92,9 +88,10 @@ class App extends Component<{}, AppTypes> {
           show={true}
           backdrop="static"
           keyboard={true}
+          size="lg"
         >
           <Modal.Header>
-            <h1>Somebody else is out there!</h1>
+            <h1>Somebody else is editing this document!</h1>
           </Modal.Header>
           <Modal.Body>
             <p>Something bad might happen!</p>
@@ -107,4 +104,4 @@ class App extends Component<{}, AppTypes> {
   }
 }
 
-export default App;//vercel bump
+export default App
